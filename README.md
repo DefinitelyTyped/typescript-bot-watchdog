@@ -3,7 +3,7 @@
 If the badge below is green, then typescript-bot has been active on
 DefinitelyTyped some time in the last two hours:
 
-[![Build Status](https://typescript.visualstudio.com/TypeScript/_apis/build/status/sandersn.types-publisher-watchdog)](https://typescript.visualstudio.com/TypeScript/_build/latest?definitionId=13)
+[![Build Status](https://typescript.visualstudio.com/TypeScript/_apis/build/status/sandersn.typescript-bot-watchdog)](https://typescript.visualstudio.com/TypeScript/_build/latest?definitionId=14)
 
 typescript-bot-watchdog reports on recent activity by typescript-bot,
 but only on the DefinitelyTyped repo. The watchdog just checks the
