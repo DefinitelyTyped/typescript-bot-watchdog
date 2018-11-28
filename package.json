@@ -1,7 +1,7 @@
 {
-  "name": "types-publisher-watchdog",
+  "name": "typescript-bot-watchdog",
   "version": "1.0.0",
-  "description": "Report latency of types-publisher",
+  "description": "Report whether typescript-bot is active",
   "main": "index.js",
   "scripts": {
     "build": "tsc",
@@ -10,8 +10,6 @@
   "author": "Nathan Shively-Sanders (@sandersn)",
   "license": "ISC",
   "dependencies": {
-    "@octokit/rest": "^16.0.3",
-    "@types/shelljs": "^0.8.0",
-    "shelljs": "^0.8.3"
+    "@octokit/rest": "^16.0.3"
   }
 }

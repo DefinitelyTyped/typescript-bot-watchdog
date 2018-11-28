@@ -13,7 +13,7 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
-    export TYPES_PUBLISHER_WATCHDOG_TOKEN=$(api.token)
+    export TYPESCRIPT_BOT_WATCHDOG_TOKEN=$(api.token)
     npm install
     npm run check
   displayName: 'npm install and check'
