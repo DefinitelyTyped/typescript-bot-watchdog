@@ -12,7 +12,9 @@ async function main() {
         throw new Error()
     }
     else {
-        console.log(Date.now() - mostRecent.valueOf())
+        console.log(new Date(Date.now()))
+        console.log((Date.now() - mostRecent.valueOf()) / 1000)
+        console.log((new Date(Date.now()) - mostRecent.valueOf()) / 1000)
     }
     console.log()
     console.log()
@@ -42,12 +44,10 @@ async function recentActivity() {
     for (const event of events.data) {
         if (event.repo.name === 'DefinitelyTyped/DefinitelyTyped') {
             // github incorrectly formats the current time zone as GMT, so undo that by removing the "Z"
-            console.log(event.created_at)
-            console.log(new Date(event.created_at))
-            console.log(event.created_at.replace(/Z$/, ''))
-            console.log(new Date(event.created_at.replace(/Z$/, '')))
-            return new Date(event.created_at.replace(/Z$/, ''))
+            console.log(event.created_at, new Date(event.created_at))
+            console.log(event.created_at.replace(/Z$/, ''), new Date(event.created_at.replace(/Z$/, '')))
+            return new Date(event.created_at)
         }
     }
 }
-main().catch(_ => process.exit(1))
+main().catch(e => { console.log(e); process.exit(1) })
