@@ -1,12 +1,10 @@
 const Gh = require('@octokit/rest')
 const http = require('https')
-var gh = new Gh()
+var gh = new Gh({
+    auth: `token ${process.env["TYPESCRIPT_BOT_WATCHDOG_TOKEN"] || ""}`
+})
 
 async function main() {
-    gh.authenticate({
-        type: "token",
-        token: process.env["TYPESCRIPT_BOT_WATCHDOG_TOKEN"] || ""
-    })
     const mostRecent = await recentActivity()
 
     if (!mostRecent) {
