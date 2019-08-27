@@ -42,6 +42,10 @@ async function recentActivity() {
     for (const event of events.data) {
         if (event.repo.name === 'DefinitelyTyped/DefinitelyTyped') {
             // github incorrectly formats the current time zone as GMT, so undo that by removing the "Z"
+            console.log(event.created_at)
+            console.log(new Date(event.created_at))
+            console.log(event.created_at.replace(/Z$/, ''))
+            console.log(new Date(event.created_at.replace(/Z$/, '')))
             return new Date(event.created_at.replace(/Z$/, ''))
         }
     }
