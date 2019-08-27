@@ -37,6 +37,7 @@ async function main() {
 async function recentActivity() {
     const events = await gh.activity.listEventsForUser({ username: 'typescript-bot' })
     for (const event of events.data) {
+        console.log(event.repo.name, event.created_at)
         if (event.repo.name === 'DefinitelyTyped/DefinitelyTyped') {
             return new Date(event.created_at)
         }
