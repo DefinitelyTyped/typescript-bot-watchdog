@@ -11,15 +11,11 @@ async function main() {
         console.log("Couldn't find any recent activity for typescript-bot")
         throw new Error()
     }
-    else {
-        console.log(new Date(Date.now()))
-        console.log((Date.now() - mostRecent.valueOf()) / 1000)
-        console.log((new Date(Date.now()) - mostRecent.valueOf()) / 1000)
-    }
     console.log()
     console.log()
     console.log("Time since typescript-bot's last activity: " + (Date.now() - mostRecent.valueOf()) / 1000)
-    if ((Date.now() - mostRecent.valueOf()) > 7200000) {
+    // github incorrectly formats the current time zone as GMT, so undo that manually
+    if (((Date.now() - 7 * 3600000) - mostRecent.valueOf()) > 7200000) {
         console.log("typescript-bot hasn't been active in over 2 hours (7200 seconds)")
         throw new Error();
     }
@@ -40,12 +36,9 @@ async function main() {
 
 /** returns {Promise<Date>} */
 async function recentActivity() {
-    const events = await gh.activity.listEventsForUser({ username: 'typescript-bot' })
+    const events = await gh.activity.listEventsForUser({ username: 'typescript-bot', headers: { "time-zone": "Europe/Amsterdam" } })
     for (const event of events.data) {
         if (event.repo.name === 'DefinitelyTyped/DefinitelyTyped') {
-            // github incorrectly formats the current time zone as GMT, so undo that by removing the "Z"
-            console.log(event.created_at, new Date(event.created_at))
-            console.log(event.created_at.replace(/Z$/, ''), new Date(event.created_at.replace(/Z$/, '')))
             return new Date(event.created_at)
         }
     }
