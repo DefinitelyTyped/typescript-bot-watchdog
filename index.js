@@ -13,9 +13,8 @@ async function main() {
     }
     console.log()
     console.log()
-    console.log("Time since typescript-bot's last activity: " + (Date.now() - mostRecent.valueOf()) / 1000)
-    // github incorrectly formats the current time zone as GMT, so undo that manually
-    if (((Date.now() - 7 * 3600000) - mostRecent.valueOf()) > 7200000) {
+    console.log("Time since typescript-bot's last activity: " + (new Date().valueOf() - mostRecent.valueOf()) / 1000)
+    if ((new Date().valueOf() - mostRecent.valueOf()) > 7200000) {
         console.log("typescript-bot hasn't been active in over 2 hours (7200 seconds)")
         throw new Error();
     }
@@ -36,7 +35,7 @@ async function main() {
 
 /** returns {Promise<Date>} */
 async function recentActivity() {
-    const events = await gh.activity.listEventsForUser({ username: 'typescript-bot', headers: { "time-zone": "Europe/Amsterdam" } })
+    const events = await gh.activity.listEventsForUser({ username: 'typescript-bot' })
     for (const event of events.data) {
         if (event.repo.name === 'DefinitelyTyped/DefinitelyTyped') {
             return new Date(event.created_at)
