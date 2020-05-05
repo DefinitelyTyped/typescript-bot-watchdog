@@ -21,6 +21,15 @@ async function main() {
 
 /** returns {Promise<Date>} */
 async function recentActivity() {
+    const dtEvents = await gh.activity.listRepoEvents({owner: "DefinitelyTyped", repo: "DefinitelyTyped" })
+    let i = 0
+    for (const event of dtEvents.data) {
+        console.log(event.created_at)
+        i++
+        if (i > 3) break
+    }
+
+
     const events = await gh.activity.listEventsForUser({ username: 'typescript-bot' })
     for (const event of events.data) {
         if (event.repo.name === 'DefinitelyTyped/DefinitelyTyped') {
