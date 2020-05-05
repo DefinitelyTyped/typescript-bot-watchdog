@@ -1,5 +1,4 @@
 const Gh = require('@octokit/rest')
-const http = require('https')
 var gh = new Gh({
     auth: `token ${process.env["TYPESCRIPT_BOT_WATCHDOG_TOKEN"] || ""}`
 })
@@ -18,19 +17,6 @@ async function main() {
         console.log("typescript-bot hasn't been active in over 2 hours (7200 seconds)")
         throw new Error();
     }
-    console.log()
-    console.log()
-    console.log()
-    console.log()
-    console.log()
-    // Cheat to keep watchdogs running -- if nobody looks at the status pages (not the badges)
-    // then the watchdogs stop running. So make it look at the pages itself
-    let request = http.get("https://typescript.visualstudio.com/TypeScript/_build?definitionId=13")
-    request.on('response', res => res.on('data', s => console.log(s.toString().slice(0,100))));
-    request.end();
-    request = http.get("https://typescript.visualstudio.com/TypeScript/_build?definitionId=14")
-    request.on('response', res => res.on('data', s => console.log(s.toString().slice(0,100))));
-    request.end();
 }
 
 /** returns {Promise<Date>} */
